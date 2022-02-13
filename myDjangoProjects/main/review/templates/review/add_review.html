@@ -1,0 +1,42 @@
+{% extends 'my_page/layout.html' %}
+{% block title %}Добавить отзыв{% endblock %}
+
+{% block content %}
+        <div class="-">
+            <h1>Оставте свой отзыв {{ title }}</h1>
+        </div>
+
+<form action="" method="post">
+        {% csrf_token %}
+        {{ form.non_fields.errors }}
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}"> </label>
+            {{ form.title }}
+            <div class="invalid-feedback">
+                   {{ form.title.errors }}
+            </div>
+        </div>
+        <br>
+         <div class="form-group">
+            <label for="{{ form.content.id_for_label }}"></label>
+            {{ form.content }}
+            <div class="invalid-feedback">
+                   {{ form.content.errors }}
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="{{ form.category.id_for_label }}"></label>
+            {{ form.category }}
+
+            <div class="invalid-feedback">
+                   {{ form.category.errors }}
+            </div>
+        </div>
+            <br>
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button class="btn btn-primary" type="submit">Добавить новость</button>
+    </div>
+</form>
+
+{% endblock %}

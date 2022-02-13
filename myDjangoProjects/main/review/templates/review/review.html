@@ -1,0 +1,47 @@
+{% extends 'my_page/layout.html' %}
+<link rel="stylesheet" type="text/css" href='/static/review/css/review.css'>
+{% block title %}Наши конаткты{% endblock %}
+
+{% block content %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    <h1>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</h1>
+    <h1 class="review-main" style="text-align: center; font-size: 40px; font-style: italic; position: relative; top: 30px;">Отзывы</h1>
+        {% for item in review %}
+            <div class="card bg-light mb-3;" style="max-width: 25rem; margin-left: 20px; margin-top: 20px; position: relative; top: 120px; rel">
+                <div class="card-header" >{{ item.category }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text" style="font-size: 20px; color: black; padding: 2px;">{{ item.content }}</p>
+                    <p class="card-text" style="font-size: 12px; color: black; padding: 2px;">{{ item.created_at }}</p>
+                </div>
+                <div class="media">
+                    {% for el in objects %}
+                        <a href="{{ item.get_absolute_url }}"></a>
+                    {% endfor %}
+                       {% if item.photo %}
+                            <a href="">Смотреть фото</a>
+                            <img src="{{ item.photo.url }}" alt="" style="width: 400px; height: 400px;">
+                       {% endif %}
+                </div>
+                <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Read more...</a>
+            </div>
+
+        {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'my_page/layout.html' %}
+{% block title %}Добавить отзыв{% endblock %}
+
+{% block content %}
+
+<div class="register_form">
+    <br><br>
+    <h1 class="register">Зарегестрируйтесь</h1>
+    <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {{ form.non_fields.errors }}
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-primary" type="submit">Зарегестрироваться</button>
+        </div>
+    </form>
+    <br>
+</div>
+{% for message in messages %}
+<div class="alert alert-danger" role="alert">
+  {{ message }}
+</div>
+
+{% endfor %}
+
+{% endblock %}
